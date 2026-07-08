@@ -16,7 +16,7 @@
 
 O ambiente representa uma residência composta por uma **sala dividida em 4 quadrantes**, um **corredor**, uma **varanda** e um **banheiro**. A figura abaixo mostra a planta com a posição dos 8 RPs (pontos de referência), dos 8 TPs (pontos de teste) e dos 8 APs (Access Points).
 
-![Planta baixa do cenário](/imgs/fig_planta_baixa.p)
+![Planta baixa do cenário](imgs/fig_planta_baixa.png)
 
 - **Quadrados azuis:** RPs (usados no treinamento).
 - **Triângulos verdes:** TPs coincidentes (mesma posição de um RP).
