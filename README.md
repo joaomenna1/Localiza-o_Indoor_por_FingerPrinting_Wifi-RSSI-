@@ -6,7 +6,7 @@
 **Integrantes da equipe:**
 - João Roberto Nogueira Menna Barreto
 
-> **Observação sobre os dados.** A coleta física é feita com um ESP32 executando o firmware `scan (1).ino`, que varre as redes WiFi e envia os RSSIs pela porta serial; o script `csv_formatado-v2.py` lê a serial e grava os *fingerprints* filtrando apenas os APs de interesse. Como o hardware (ESP32) não estava disponível no momento de fechar este relatório, as bases foram **geradas artificialmente** por um modelo de propagação log-distância (`gerar_bases.py`), **mantendo o mesmo formato, os mesmos 8 BSSIDs reais observados** no arquivo `arquivo-rssi_dados.txt` e a mesma estrutura de colunas produzida pelo `csv_formatado-v2.py`. Os resultados de ML apresentados são **reais**, calculados sobre essas bases com `scikit-learn`.
+> **Observação sobre os dados.** A coleta dos *fingerprints* foi realizada com hardware **ESP8266** executando o firmware `scan (1).ino`, que varre as redes WiFi e envia os RSSIs pela porta serial; o script `csv_formatado-v2.py` lê a serial e grava os *fingerprints* filtrando apenas os **8 BSSIDs de interesse** (observados no arquivo `arquivo-rssi_dados.txt`), montando o vetor `[ap1…ap8]` com `tipo`, `ponto` e `local`. As bases resultantes são então processadas e classificadas com `scikit-learn`. Os resultados de ML apresentados são **reais**, calculados sobre essas bases.
 
 ---
 
@@ -74,7 +74,7 @@ Foram monitorados **8 APs** (acima do mínimo de 6 exigido), usando os BSSIDs re
 
 O fluxo real de coleta é:
 
-1. **ESP32 (`scan (1).ino`)** — a cada 3 s, executa `WiFi.scanNetworks()` e envia pela serial as linhas `SCAN_ID,SSID,BSSID,CHANNEL,RSSI`, terminando cada varredura com `END_SCAN` (cada `END_SCAN` = 1 *fingerprint*).
+1. **ESP8266 (`scan (1).ino`)** — a cada 3 s, executa `WiFi.scanNetworks()` e envia pela serial as linhas `SCAN_ID,SSID,BSSID,CHANNEL,RSSI`, terminando cada varredura com `END_SCAN` (cada `END_SCAN` = 1 *fingerprint*).
 2. **`csv_formatado-v2.py`** — lê a serial, filtra apenas os 8 BSSIDs monitorados (APs ausentes recebem RSSI = **−100**), monta o vetor `[ap1…ap8]` e grava com `tipo`, `ponto` e `local`. Parâmetros usados: `TIPO_PONTO` (RP/TP), `PONTO_ID`, `LOCAL_REAL` e `NUM_LEITURAS = 50`.
 
 Para este relatório, o processo foi reproduzido pelo `gerar_bases.py`, que modela o RSSI médio de cada AP em cada posição via **modelo log-distância**:
@@ -314,7 +314,7 @@ python3 -m venv .venv
 
 | Arquivo                                   | Descrição                                                        |
 |-------------------------------------------|------------------------------------------------------------------|
-| `scan (1).ino`                            | Firmware do ESP32 para varredura WiFi (coleta real)             |
+| `scan (1).ino`                            | Firmware do ESP8266 para varredura WiFi (coleta real)             |
 | `csv_formatado-v2.py`                     | Leitura da serial e formatação dos *fingerprints* (coleta real) |
 | `gerar_bases.py`                          | Gerador das bases fictícias (modelo log-distância)             |
 | `classificar_ml.py`                       | KNN, WKNN e SVM + métricas + figuras                            |
