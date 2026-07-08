@@ -199,7 +199,7 @@ As métricas de **Precision, Recall e F1-Score** são reportadas em **média mac
 
 ### 4.3. Acurácia × número de amostras por TP
 
-![Acurácia x amostras](fig_acuracia_x_amostras.png)
+![Acurácia x amostras](imgs/fig_acuracia_x_amostras.png)
 
 ### 4.4. Matrizes de Confusão (melhores modelos, 50 amostras/TP)
 
@@ -301,28 +301,28 @@ python3 -m venv .venv
 .venv/bin/pip install numpy pandas scikit-learn matplotlib
 
 # 2) gerar as bases (treino e teste)
-.venv/bin/python gerar_bases.py
+.venv/bin/python python/gerar_bases.py
 
 # 3) rodar os algoritmos de ML e gerar métricas/figuras
-.venv/bin/python classificar_ml.py
+.venv/bin/python python/classificar_ml.py
 
 # 4) gerar a planta baixa e as matrizes de confusão em texto
-.venv/bin/python planta_e_matrizes.py
+.venv/bin/python python/planta_e_matrizes.py
 ```
 
 ### Arquivos do projeto
 
-| Arquivo                                   | Descrição                                                        |
-|-------------------------------------------|------------------------------------------------------------------|
-| `scan (1).ino`                            | Firmware do ESP8266 para varredura WiFi (coleta real)             |
-| `csv_formatado-v2.py`                     | Leitura da serial e formatação dos *fingerprints* (coleta real) |
-| `gerar_bases.py`                          | Gerador das bases fictícias (modelo log-distância)             |
-| `classificar_ml.py`                       | KNN, WKNN e SVM + métricas + figuras                            |
-| `planta_e_matrizes.py`                    | Planta baixa e matrizes de confusão em texto                   |
-| `wifi_train_50_por_rp_com_local.csv`      | Base de treino (8 RPs × 50 *fingerprints*)                      |
-| `wifi_test_50_por_rp_com_local.csv`       | Base de teste (8 TPs × 50 *fingerprints*)                       |
-| `resultados_metricas.csv`                 | Métricas de todas as configurações/cenários                    |
-| `acuracia_coinc_vs_naocoinc.csv`          | Acurácia coincidentes × não coincidentes                       |
-| `fig_planta_baixa.png`                    | Planta baixa do cenário                                         |
-| `fig_matriz_confusao_{KNN,WKNN,SVM}.png`  | Matrizes de confusão dos melhores modelos                      |
-| `fig_acuracia_x_amostras.png`             | Acurácia × amostras por TP                                      |
+| Arquivo                                        | Descrição                                                        |
+|------------------------------------------------|------------------------------------------------------------------|
+| `examples/scan (1).ino`                        | Firmware do ESP8266 para varredura WiFi (coleta real)             |
+| `python/csv_formatado-v2.py`                   | Leitura da serial e formatação dos *fingerprints* (coleta real) |
+| `python/gerar_bases.py`                        | Gerador das bases fictícias (modelo log-distância)             |
+| `python/classificar_ml.py`                     | KNN, WKNN e SVM + métricas + figuras                            |
+| `python/planta_e_matrizes.py`                  | Planta baixa e matrizes de confusão em texto                   |
+| `results/wifi_train_50_por_rp_com_local.csv`   | Base de treino (8 RPs × 50 *fingerprints*)                      |
+| `results/wifi_test_50_por_rp_com_local.csv`    | Base de teste (8 TPs × 50 *fingerprints*)                       |
+| `results/resultados_metricas.csv`              | Métricas de todas as configurações/cenários                    |
+| `results/acuracia_coinc_vs_naocoinc.csv`       | Acurácia coincidentes × não coincidentes                       |
+| `imgs/fig_planta_baixa.png`                    | Planta baixa do cenário                                         |
+| `imgs/fig_matriz_confusao_{KNN,WKNN,SVM}.png`  | Matrizes de confusão dos melhores modelos                      |
+| `imgs/fig_acuracia_x_amostras.png`             | Acurácia × amostras por TP                                      |
